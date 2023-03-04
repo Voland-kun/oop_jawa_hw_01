@@ -10,20 +10,16 @@ public class Main {
         Person Sasha = new Person("Саша");
         Person Egor = new Person("Егор");
 
-        Tree tree = new Tree();
-        tree.addParent(Anton,Sergei);
-        tree.addParent(Alyona,Sergei);
-        tree.addParent(Sergei,Egor);
-        tree.addParent(Vasya,Sasha);
-        tree.addParent(Nina,Sasha);
-        tree.addParent(Sasha,Egor);
+        Sergei.addParent(Anton);
+        Sergei.addParent(Alyona);
+        Egor.addParent(Sergei);
+        Sasha.addParent(Vasya);
+        Sasha.addParent(Nina);
+        Egor.addParent(Sasha);
 
-        tree.researchGrandparents();
+        Egor.researchGrandparents();
 
-//        for(Relationship t : tree.getTree()) {
-//            System.out.println(t);
-//        }
-
-        System.out.println(new Research(tree).getResearch(Egor, "grandparent"));
+        System.out.println(new Research(Egor.getTree()).getResearch(Egor, "grandparent"));
+        System.out.println(new Research(Egor.getTree()).getResearch(Sergei, "parent"));
     }
 }

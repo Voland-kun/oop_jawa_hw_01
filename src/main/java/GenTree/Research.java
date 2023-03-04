@@ -7,8 +7,8 @@ public class Research {
     public HashSet<Person> result;
 
 
-    public Research(Tree tree) {
-        this.source = tree.getTree();
+    public Research(HashSet tree) {
+        this.source = tree;
         this.result = new HashSet<Person>();
     }
 
