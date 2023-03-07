@@ -9,15 +9,32 @@ public interface GenTree {
         return tree;
     }
 
-    void addParent(Person child);
+    default void addParent(Person parent) {
+        tree.add(new Relationship(parent, (Person)this, "parent"));
+        tree.add(new Relationship((Person)this , parent, "child"));
+    };
 
-    void addChild(Person parent);
+    default void addChild(Person child) {
+        tree.add(new Relationship(child, (Person)this, "child"));
+        tree.add(new Relationship((Person)this, child, "parent"));
+    };
 
-    void addGrandchild(Person grandparent);
+    default void addGrandchild(Person grandchild) {
+        tree.add(new Relationship((Person)this, grandchild, "grandparent"));
+        tree.add(new Relationship(grandchild, (Person)this, "grandchild"));
+    }
 
-    void addGrandparent(Person grandchild);
+            ;
 
-    public void marry(Person spouse);
+    default void addGrandparent(Person grandparent) {
+        tree.add(new Relationship(grandparent, (Person)this, "grandparent"));
+        tree.add(new Relationship((Person)this, grandparent, "grandchild"));
+    };
+
+    default void marry(Person spouse) {
+        tree.add(new Relationship((Person)this, spouse, "spouse"));
+        tree.add(new Relationship(spouse, (Person)this, "spouse"));
+    };
 
     default void researchGrandparents() {
         HashSet<Relationship> temp = new HashSet<>();
